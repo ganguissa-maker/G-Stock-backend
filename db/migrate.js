@@ -10,7 +10,11 @@ async function migrate() {
     await pool.query(sql);
     console.log('✅ Migration terminée avec succès.');
   } catch (err) {
-    console.error('❌ Erreur lors de la migration :', err.message);
+    console.error('❌ Erreur lors de la migration :');
+    console.error('  message :', err.message || '(vide)');
+    console.error('  code    :', err.code || '(aucun)');
+    console.error('  detail  :', err.detail || '(aucun)');
+    console.error('  stack   :', err.stack);
     process.exitCode = 1;
   } finally {
     await pool.end();
